@@ -1,0 +1,100 @@
+package com.ems.EMS_backend.dto;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.ems.EMS_backend.common.BaseDTO;
+
+@Entity
+@Table(name = "ST_STAFF")
+public class StaffDTO extends BaseDTO {
+
+	@Column(name = "FIRST_NAME", length = 50)
+	private String firstName;
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	@Column(name = "LAST_NAME", length = 50)
+	private String lastName;
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	@Column(name = "DOB")
+	private Date dob;
+
+	public Date getDob() {
+		return dob;
+	}
+
+	@Column(name = "GENDER", length = 10)
+	private String gender;
+
+	public String getGender() {
+		return gender;
+	}
+
+	@Column(name = "PHONE_NO", length = 15)
+	private String phoneNo;
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	@Column(name = "QUALIFICATION", length = 15)
+	private String qualification;
+
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
+	@Column(name = "EMAIL", length = 50)
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	@Column(name = "COURSE_NAME", length = 50)
+	private String courseName;
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	@Column(name = "COLLEGE_NAME", length = 50)
+	private String collegeName;
+
+	public String getCollegeName() {
+		return collegeName;
+	}
+
+	@Column(name = "COLLEGE_ID", length = 50)
+	private long collegeId;
+
+	public long getCollegeId() {
+		return collegeId;
+	}
+
+	@Column(name = "STAFF_ID", length = 50)
+	private String staffId;
+
+	public String getStaffId() {
+		return staffId;
+	}
+
+	public void setCollegeName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+}

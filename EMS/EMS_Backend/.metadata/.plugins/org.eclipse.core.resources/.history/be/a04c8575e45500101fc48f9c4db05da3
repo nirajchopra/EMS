@@ -1,0 +1,12 @@
+package com.ems.EMS_backend.dao;
+
+import com.ems.EMS_backend.common.BaseDAOInt;
+import com.rays.dto.CollegeDTO;
+
+/**
+ * College DAO interface.
+ * 
+ * @author Anshul Prajapati
+ */
+public interface CompanyDAOInt extends BaseDAOInt<CollegeDTO> {
+}

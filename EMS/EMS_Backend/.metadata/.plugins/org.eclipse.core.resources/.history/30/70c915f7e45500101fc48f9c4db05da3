@@ -1,0 +1,20 @@
+package com.ems.EMS_backend.service;
+
+import com.ems.EMS_backend.common.BaseServiceInt;
+import com.ems.EMS_backend.common.UserContext;
+import com.rays.dto.CollegeDTO;
+
+/**
+ * College Service interface.
+ * 
+ * @author Anshul Prajapati
+ */
+
+public interface CompanyServiceInt extends BaseServiceInt<CompanyDTO> {
+
+	/**
+	 * Finds a Role by name.
+	 */
+	public CollegeDTO findByName(String name, UserContext context);
+
+}

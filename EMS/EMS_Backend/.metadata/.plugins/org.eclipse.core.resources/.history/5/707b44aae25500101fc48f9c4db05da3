@@ -1,0 +1,12 @@
+package com.ems.EMS_backend.dao;
+
+import com.ems.EMS_backend.common.BaseDAOInt;
+import com.ems.EMS_backend.dto.EmployeeDTO;
+
+/**
+ * Student DAO interface.
+ * 
+ * @author Anshul Prajapati
+ */
+public interface EmployeeDAOInt extends BaseDAOInt<EmployeeDTO> {
+}

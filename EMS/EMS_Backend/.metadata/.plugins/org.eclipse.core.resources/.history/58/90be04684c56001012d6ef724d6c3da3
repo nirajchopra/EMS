@@ -1,0 +1,21 @@
+package com.ems.EMS_backend.common.attachment;
+
+import java.util.List;
+
+import com.ems.EMS_backend.common.BaseServiceInt;
+import com.ems.EMS_backend.common.UserContext;
+
+/**
+ * College Service interface.
+ * 
+ * @author Anshul Prajapati
+ */
+
+public interface AttachmentServiceInt extends BaseServiceInt<AttachmentDTO> {
+
+	public List<AttachmentSummaryDTO> search(AttachmentSummaryDTO dto, int pageNo, int pageSize,
+			UserContext userContext);
+
+	public List<AttachmentSummaryDTO> search(AttachmentSummaryDTO dto, UserContext userContext);
+
+}

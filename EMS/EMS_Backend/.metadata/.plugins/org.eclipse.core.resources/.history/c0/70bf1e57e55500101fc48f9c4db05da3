@@ -1,0 +1,73 @@
+package com.ems.EMS_backend.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ems.EMS_backend.common.BaseDAOImpl;
+import com.ems.EMS_backend.common.UserContext;
+import com.ems.EMS_backend.dto.CompanyDTO;
+import com.ems.EMS_backend.dto.EmployeeDTO;
+
+@Repository
+public abstract class EmployeeDAOImpl extends BaseDAOImpl<EmployeeDTO> implements EmployeeDAOInt {
+
+	protected List<Predicate> getWhereClause(EmployeeDTO dto, CriteriaBuilder builder, Root<EmployeeDTO> qRoot) {
+		// Create where conditions
+		List<Predicate> whereCondition = new ArrayList<Predicate>();
+
+		if (!isEmptyString(dto.getEnrolNo())) {
+
+			whereCondition.add(builder.like(qRoot.get("enrolNo"), dto.getEnrolNo() + "%"));
+		}
+
+		if (!isZeroNumber(dto.getEmployeeId())) {
+
+			whereCondition.add(builder.equal(qRoot.get("employeeId"), dto.getEmployeeId()));
+		}
+
+		if (!isEmptyString(dto.getEmployeeName())) {
+
+			whereCondition.add(builder.like(qRoot.get("employeeName"), dto.getEmployeeName() + "%"));
+		}
+
+		if (!isEmptyString(dto.getEmail())) {
+
+			whereCondition.add(builder.like(qRoot.get("email"), dto.getEmail() + "%"));
+		}
+
+		if (isNotNull(dto.getDob())) {
+
+			whereCondition.add(builder.equal(qRoot.get("dob"), dto.getDob()));
+		}
+
+		if (!isEmptyString(dto.getPhoneNo())) {
+			whereCondition.add(builder.like(qRoot.get("phoneNo"), dto.getPhoneNo() + "%"));
+		}
+
+		return whereCondition;
+	}
+
+	@Override
+	public Class<EmployeeDTO> getDTOClass() {
+		return EmployeeDTO.class;
+	}
+
+	@Autowired
+	CompanyDAOInt companyService = null;
+
+	@Override
+	protected void populate(EmployeeDTO dto, UserContext userContext) {
+		CompanyDTO collegeDTO = companyService.findByPK(dto.getCompanyId(), userContext);
+		if (companyDTO != null) {
+			dto.setCollegeName(companyDTO.getName());
+		}
+	}
+
+}

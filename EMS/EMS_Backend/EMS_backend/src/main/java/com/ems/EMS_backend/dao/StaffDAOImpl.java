@@ -1,0 +1,65 @@
+package com.ems.EMS_backend.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ems.EMS_backend.common.BaseDAOImpl;
+import com.ems.EMS_backend.common.UserContext;
+import com.ems.EMS_backend.dto.CompanyDTO;
+import com.ems.EMS_backend.dto.StaffDTO;
+
+@Repository
+public class StaffDAOImpl extends BaseDAOImpl<StaffDTO> implements StaffDAOInt {
+
+	@Override
+	protected List<Predicate> getWhereClause(StaffDTO dto, CriteriaBuilder builder, Root<StaffDTO> qRoot) {
+		List<Predicate> whereCondition = new ArrayList<Predicate>();
+
+		if (!isEmptyString(dto.getCollegeName())) {
+
+			whereCondition.add(builder.like(qRoot.get("collegeName"), dto.getCollegeName() + "%"));
+		}
+
+		if (!isZeroNumber(dto.getCollegeId())) {
+
+			whereCondition.add(builder.equal(qRoot.get("collegeId"), dto.getCollegeId()));
+		}
+
+		if (!isEmptyString(dto.getCourseName())) {
+
+			whereCondition.add(builder.like(qRoot.get("courseName"), dto.getCourseName() + "%"));
+		}
+
+		return whereCondition;
+	}
+
+	@Override
+	public Class<StaffDTO> getDTOClass() {
+		// TODO Auto-generated method stub
+		return StaffDTO.class;
+	}
+
+	@Autowired
+	CompanyDAOInt companyDao;
+
+	@Autowired
+	EmployeeDAOInt employeeDao;
+
+	@Override
+	protected void populate(StaffDTO dto, UserContext userContext) {
+		if (dto.getCollegeId() > 0) {
+			CompanyDTO companyDto = companyDao.findByPK(dto.getCollegeId(), userContext);
+			dto.setCollegeName(companyDto.getName());
+			System.out.println(dto.getCollegeName() + "CollegeNAME-------");
+		}
+
+	}
+
+}

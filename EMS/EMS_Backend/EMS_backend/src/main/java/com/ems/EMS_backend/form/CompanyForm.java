@@ -1,0 +1,82 @@
+package com.ems.EMS_backend.form;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import com.ems.EMS_backend.common.BaseDTO;
+import com.ems.EMS_backend.common.BaseForm;
+import com.ems.EMS_backend.dto.CompanyDTO;
+
+public class CompanyForm extends BaseForm {
+
+	@NotEmpty
+	private String name;
+
+	@NotEmpty
+	private String address;
+
+	@NotEmpty
+	private String state;
+
+	@NotEmpty
+	private String city;
+
+	@NotNull
+	@Pattern(regexp = "(^$|[0-9]{10})")
+	private String phoneNo;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
+	@Override
+	public BaseDTO getDto() {
+
+		CompanyDTO dto = initDTO(new CompanyDTO());
+		dto.setName(name);
+		dto.setAddress(address);
+		dto.setCity(city);
+		dto.setState(state);
+		dto.setPhoneNo(phoneNo);
+
+		return dto;
+
+	}
+}

@@ -1,0 +1,41 @@
+package com.ems.EMS_backend.ctl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ems.EMS_backend.common.BaseCtl;
+import com.ems.EMS_backend.common.DropdownList;
+import com.ems.EMS_backend.common.ORSResponse;
+import com.ems.EMS_backend.dto.StaffDTO;
+import com.ems.EMS_backend.form.StaffForm;
+import com.ems.EMS_backend.service.CompanyServiceInt;
+import com.rays.dto.CollegeDTO;
+import com.rays.dto.CourseDTO;
+import com.rays.dto.SubjectDTO;
+
+@RestController
+@RequestMapping(value = "Staff")
+public class StaffCtl extends BaseCtl<StaffForm, StaffDTO, SatffServiceInt> {
+
+	@Autowired
+	private CompanyServiceInt companyService;
+
+	@GetMapping("/preload")
+	public ORSResponse preload() {
+
+		System.out.println("preload of facultyctl...........");
+		ORSResponse res = new ORSResponse(true);
+		
+		List<DropdownList> list2 = companyService.search(new CompanyDTO(), userContext);
+		
+		res.addresult("companyList", list2);
+		// System.out.println(list1+"list1...........");
+		System.out.println(res + "...........>>");
+		// System.out.println(list+" "+list1+" "+list2+"...........>>");
+		return res;
+	}
+}

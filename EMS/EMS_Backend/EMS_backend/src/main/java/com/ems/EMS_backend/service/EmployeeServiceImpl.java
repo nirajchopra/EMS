@@ -1,0 +1,35 @@
+package com.ems.EMS_backend.service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ems.EMS_backend.common.BaseServiceImpl;
+import com.ems.EMS_backend.common.UserContext;
+import com.ems.EMS_backend.dao.EmployeeDAOInt;
+import com.ems.EMS_backend.dto.EmployeeDTO;
+
+/**
+ * Session facade of Role Service. It is transactional, apply declarative
+ * transactions with help of Spring AOP.
+ * 
+ * If unchecked exception is propagated from a method then transaction is rolled
+ * back.
+ * 
+ * Default propagation value is Propagation.REQUIRED and readOnly = false
+ * 
+ * @author Niraj Chopra
+ */
+@Service
+@Transactional
+public class EmployeeServiceImpl extends BaseServiceImpl<EmployeeDTO, EmployeeDAOInt> implements EmployeeServiceInt {
+
+	private static Logger log = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
+	@Transactional(readOnly = true)
+	public EmployeeDTO findByEmail(String email, UserContext context) {
+		return baseDao.findByUniqueKey("email", email, context);
+	}
+
+}

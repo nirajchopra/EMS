@@ -1,0 +1,11 @@
+package com.ems.EMS_backend.service;
+
+import com.ems.EMS_backend.common.BaseServiceInt;
+import com.ems.EMS_backend.common.UserContext;
+import com.ems.EMS_backend.dto.StaffDTO;
+import com.rays.dto.FacultyDTO;
+
+public interface StaffServiceInt extends BaseServiceInt<StaffDTO> {
+
+	public FacultyDTO findByEmail(String email, UserContext context);
+}

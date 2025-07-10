@@ -1,0 +1,8 @@
+package com.ems.EMS_backend.dao;
+
+import com.ems.EMS_backend.common.BaseDAOInt;
+import com.rays.dto.FacultyDTO;
+
+public interface FacultyDAOInt extends BaseDAOInt<FacultyDTO> {
+
+}
